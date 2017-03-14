@@ -1,0 +1,244 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "title": "EmployeesEndPoint",
+        "description": "Provides rich employees information",
+        "version": "1.0.0"
+    },
+    "host": "api.employees.com",
+    "schemes": [
+        "https"
+    ],
+    "basePath": "/v1",
+    "produces": [
+        "application/json"
+    ],
+    "paths": {
+        "/GetEmployeesAll": {
+            "get": {
+                "summary": "Returns every single emloyee",
+                "description": "An endpoint that returns every single employee",
+                "tags": [
+                    "GetEmployees"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "An array of employees",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/Employee"
+                            }
+                        }
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            }
+        },
+        "/AddEmployee": {
+            "post": {
+                "summary": "Adds a new employee",
+                "description": "Adds a new employee\n",
+                "parameters": [
+                    {
+                        "name": "employeename",
+                        "in": "query",
+                        "description": "Name of employee",
+                        "required": true,
+                        "type": "string",
+                        "format": "string"
+                    },
+                    {
+                        "name": "emailaddress",
+                        "in": "query",
+                        "description": "Email of employee",
+                        "required": true,
+                        "type": "string",
+                        "format": "string"
+                    },
+                    {
+                        "name": "age",
+                        "in": "query",
+                        "description": "Age of employee",
+                        "required": true,
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    {
+                        "name": "department",
+                        "in": "query",
+                        "description": "Department of the employee",
+                        "required": true,
+                        "type": "string",
+                        "format": "string"
+                    },
+                    {
+                        "name": "reportingdate",
+                        "in": "query",
+                        "description": "Reporting date of the employee",
+                        "required": true,
+                        "type": "string",
+                        "format": "dateTime"
+                    }
+                ],
+                "tags": [
+                    "AddEmployees"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Employee added",
+                        "schema": {
+                            "type": "object"
+                        }
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            }
+        },
+        "/SetReportingDate": {
+            "put": {
+                "summary": "Updates the reporting date",
+                "description": "Updates the reporting date of the employee\n",
+                "parameters": [
+                    {
+                        "name": "employeeemail",
+                        "in": "query",
+                        "description": "Email address of the employee",
+                        "required": true,
+                        "type": "string",
+                        "format": "string"
+                    },
+                    {
+                        "name": "days",
+                        "in": "query",
+                        "description": "The reporting days of the employee",
+                        "required": true,
+                        "type": "string",
+                        "format": "dateTime"
+                    }
+                ],
+                "tags": [
+                    "SetReportingDate"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "status",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            }
+        },
+        "/GetEmployee": {
+            "get": {
+                "summary": "Returns a single emloyee",
+                "description": "An endpoint that returns a single employee",
+                "parameters": [
+                    {
+                        "name": "employeeemail",
+                        "in": "query",
+                        "description": "Email address of the employee",
+                        "required": true,
+                        "type": "string",
+                        "format": "string"
+                    }
+                ],
+                "tags": [
+                    "GetEmployee"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The employee with the provided email address",
+                        "schema": {
+                            "type": "object",
+                            "items": {
+                                "$ref": "#/definitions/Employee"
+                            }
+                        }
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            }
+        },
+        "/DeleteEmployee": {
+            "post": {
+                "summary": "Returns a boolean of delete operation result",
+                "description": "An endpoint that returns a deletes employee",
+                "parameters": [
+                    {
+                        "name": "employeeemail",
+                        "in": "query",
+                        "description": "Email address of the employee",
+                        "required": true,
+                        "type": "string",
+                        "format": "email"
+                    }
+                ],
+                "tags": [
+                    "DeleteEmployee"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Return true if deleted false otherwise",
+                        "schema": {
+                            "type": "boolean"
+                        }
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "Employee": {
+            "type": "object",
+            "properties": {
+                "name": {
+                    "type": "string"
+                }
+            }
+        },
+        "Error": {
+            "type": "object",
+            "properties": {
+                "code": {
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "message": {
+                    "type": "string"
+                },
+                "fields": {
+                    "type": "string"
+                }
+            }
+        }
+    }
+}
