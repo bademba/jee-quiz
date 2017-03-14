@@ -10,10 +10,10 @@ package com.safinterview.database.models.employee;
  */
 public class EmployeeInfo{
 
- private String employeeUuid; private String employeeName; private String emailAddress; private String reportingDate; private int age;
+ private String employeeUuid; private String employeeName; private String emailAddress; private String department; private String reportingDate; private int age;
 
-public EmployeeInfo ( String employeeUuid, String employeeName, String emailAddress, String reportingDate, int age) {
-	this.employeeUuid = employeeUuid;this.employeeName = employeeName;this.emailAddress = emailAddress;this.reportingDate = reportingDate;this.age = age;
+public EmployeeInfo ( String employeeUuid, String employeeName, String emailAddress, String department, String reportingDate, int age) {
+	this.employeeUuid = employeeUuid;this.employeeName = employeeName;this.emailAddress = emailAddress;this.department = department;this.reportingDate = reportingDate;this.age = age;
 }
 
 /**
@@ -98,6 +98,34 @@ public void setEmailAddress (String emailAddress){
 */
 public EmployeeInfo appendEmailAddress (String emailAddress){
 	this.setEmailAddress (emailAddress);
+	return this;
+}
+/**
+* Gets the value of department
+*
+* @return department department
+*/
+public String getDepartment (){
+	return department;
+}
+
+/**
+* Sets the value of  department
+*
+* @param  department  department
+*/
+public void setDepartment (String department){
+	this.department = department;
+}
+
+/**
+* Sets the value of  department
+*
+* @param  department  department
+* @return an handle of this class object to enable set more params
+*/
+public EmployeeInfo appendDepartment (String department){
+	this.setDepartment (department);
 	return this;
 }
 /**

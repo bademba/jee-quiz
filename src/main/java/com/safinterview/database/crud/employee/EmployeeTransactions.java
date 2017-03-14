@@ -48,8 +48,8 @@ public class EmployeeTransactions extends TransactionWrapper {
 	* @return the success status of the transaction
 	*/
 	public boolean insert(EmployeeInfo employeeInfo) throws SQLException {
-		String[] columns = { TableSchemas.Employee.EMPLOYEE_UUID,TableSchemas.Employee.EMPLOYEE_NAME,TableSchemas.Employee.EMAIL_ADDRESS,TableSchemas.Employee.REPORTING_DATE,TableSchemas.Employee.AGE };
-		String[] values = { String.valueOf(employeeInfo.getEmployeeUuid()),String.valueOf(employeeInfo.getEmployeeName()),String.valueOf(employeeInfo.getEmailAddress()),String.valueOf(employeeInfo.getReportingDate()),String.valueOf(employeeInfo.getAge()) };
+		String[] columns = { TableSchemas.Employee.EMPLOYEE_UUID,TableSchemas.Employee.EMPLOYEE_NAME,TableSchemas.Employee.EMAIL_ADDRESS,TableSchemas.Employee.DEPARTMENT,TableSchemas.Employee.REPORTING_DATE,TableSchemas.Employee.AGE };
+		String[] values = { String.valueOf(employeeInfo.getEmployeeUuid()),String.valueOf(employeeInfo.getEmployeeName()),String.valueOf(employeeInfo.getEmailAddress()),String.valueOf(employeeInfo.getDepartment()),String.valueOf(employeeInfo.getReportingDate()),String.valueOf(employeeInfo.getAge()) };
 		return insert(getTableName(), columns, values, true);
 	}
 
@@ -61,8 +61,8 @@ public class EmployeeTransactions extends TransactionWrapper {
 	* @return the success status of the transaction
 	*/
 	public boolean delete(EmployeeInfo employeeInfo) throws SQLException {
-		String[] whereColumns = { TableSchemas.Employee.EMPLOYEE_UUID,TableSchemas.Employee.EMPLOYEE_NAME,TableSchemas.Employee.EMAIL_ADDRESS,TableSchemas.Employee.REPORTING_DATE,TableSchemas.Employee.AGE };
-		String[] whereRecords = { String.valueOf(employeeInfo.getEmployeeUuid()),String.valueOf(employeeInfo.getEmployeeName()),String.valueOf(employeeInfo.getEmailAddress()),String.valueOf(employeeInfo.getReportingDate()),String.valueOf(employeeInfo.getAge()) };
+		String[] whereColumns = { TableSchemas.Employee.EMPLOYEE_UUID,TableSchemas.Employee.EMPLOYEE_NAME,TableSchemas.Employee.EMAIL_ADDRESS,TableSchemas.Employee.DEPARTMENT,TableSchemas.Employee.REPORTING_DATE,TableSchemas.Employee.AGE };
+		String[] whereRecords = { String.valueOf(employeeInfo.getEmployeeUuid()),String.valueOf(employeeInfo.getEmployeeName()),String.valueOf(employeeInfo.getEmailAddress()),String.valueOf(employeeInfo.getDepartment()),String.valueOf(employeeInfo.getReportingDate()),String.valueOf(employeeInfo.getAge()) };
 		return delete(getTableName(), whereColumns, whereRecords, false);
 	}
 
@@ -80,10 +80,10 @@ public class EmployeeTransactions extends TransactionWrapper {
 	*/
 	public int update(EmployeeInfo oldEmployeeInfo, EmployeeInfo newEmployeeInfo) throws SQLException, ConnectException, ClassNotFoundException, SocketException {
 
-		String[] newColumns = {TableSchemas.Employee.EMPLOYEE_UUID,TableSchemas.Employee.EMPLOYEE_NAME,TableSchemas.Employee.EMAIL_ADDRESS,TableSchemas.Employee.REPORTING_DATE,TableSchemas.Employee.AGE};
-		String[] newRecords = {String.valueOf(newEmployeeInfo.getEmployeeUuid()),String.valueOf(newEmployeeInfo.getEmployeeName()),String.valueOf(newEmployeeInfo.getEmailAddress()),String.valueOf(newEmployeeInfo.getReportingDate()),String.valueOf(newEmployeeInfo.getAge())};
-		String[] whereColumns = {TableSchemas.Employee.EMPLOYEE_UUID,TableSchemas.Employee.EMPLOYEE_NAME,TableSchemas.Employee.EMAIL_ADDRESS,TableSchemas.Employee.REPORTING_DATE,TableSchemas.Employee.AGE};
-		String[] whereRecords = {String.valueOf(oldEmployeeInfo.getEmployeeUuid()),String.valueOf(oldEmployeeInfo.getEmployeeName()),String.valueOf(oldEmployeeInfo.getEmailAddress()),String.valueOf(oldEmployeeInfo.getReportingDate()),String.valueOf(oldEmployeeInfo.getAge())};
+		String[] newColumns = {TableSchemas.Employee.EMPLOYEE_UUID,TableSchemas.Employee.EMPLOYEE_NAME,TableSchemas.Employee.EMAIL_ADDRESS,TableSchemas.Employee.DEPARTMENT,TableSchemas.Employee.REPORTING_DATE,TableSchemas.Employee.AGE};
+		String[] newRecords = {String.valueOf(newEmployeeInfo.getEmployeeUuid()),String.valueOf(newEmployeeInfo.getEmployeeName()),String.valueOf(newEmployeeInfo.getEmailAddress()),String.valueOf(newEmployeeInfo.getDepartment()),String.valueOf(newEmployeeInfo.getReportingDate()),String.valueOf(newEmployeeInfo.getAge())};
+		String[] whereColumns = {TableSchemas.Employee.EMPLOYEE_UUID,TableSchemas.Employee.EMPLOYEE_NAME,TableSchemas.Employee.EMAIL_ADDRESS,TableSchemas.Employee.DEPARTMENT,TableSchemas.Employee.REPORTING_DATE,TableSchemas.Employee.AGE};
+		String[] whereRecords = {String.valueOf(oldEmployeeInfo.getEmployeeUuid()),String.valueOf(oldEmployeeInfo.getEmployeeName()),String.valueOf(oldEmployeeInfo.getEmailAddress()),String.valueOf(oldEmployeeInfo.getDepartment()),String.valueOf(oldEmployeeInfo.getReportingDate()),String.valueOf(oldEmployeeInfo.getAge())};
 		
 		return update(getTableName(), newColumns, newRecords, whereColumns, whereRecords, false);
 	}
@@ -96,8 +96,8 @@ public class EmployeeTransactions extends TransactionWrapper {
 	* @return a result set of the search query
 	*/
 	public ResultSet searchRaw(EmployeeInfo employeeInfo) throws SQLException {
-		String[] whereColumns = { TableSchemas.Employee.EMPLOYEE_UUID,TableSchemas.Employee.EMPLOYEE_NAME,TableSchemas.Employee.EMAIL_ADDRESS,TableSchemas.Employee.REPORTING_DATE,TableSchemas.Employee.AGE };
-		String[] whereRecords = { String.valueOf(employeeInfo.getEmployeeUuid()),String.valueOf(employeeInfo.getEmployeeName()),String.valueOf(employeeInfo.getEmailAddress()),String.valueOf(employeeInfo.getReportingDate()),String.valueOf(employeeInfo.getAge()) };
+		String[] whereColumns = { TableSchemas.Employee.EMPLOYEE_UUID,TableSchemas.Employee.EMPLOYEE_NAME,TableSchemas.Employee.EMAIL_ADDRESS,TableSchemas.Employee.DEPARTMENT,TableSchemas.Employee.REPORTING_DATE,TableSchemas.Employee.AGE };
+		String[] whereRecords = { String.valueOf(employeeInfo.getEmployeeUuid()),String.valueOf(employeeInfo.getEmployeeName()),String.valueOf(employeeInfo.getEmailAddress()),String.valueOf(employeeInfo.getDepartment()),String.valueOf(employeeInfo.getReportingDate()),String.valueOf(employeeInfo.getAge()) };
 		return query(getTableName(), whereColumns, whereRecords, false);
 	}
 
@@ -112,8 +112,8 @@ public class EmployeeTransactions extends TransactionWrapper {
 		
 		List<EmployeeInfo> employeeInfoList = new ArrayList<>();
 		
-		String[] whereColumns = { TableSchemas.Employee.EMPLOYEE_UUID,TableSchemas.Employee.EMPLOYEE_NAME,TableSchemas.Employee.EMAIL_ADDRESS,TableSchemas.Employee.REPORTING_DATE,TableSchemas.Employee.AGE };
-		String[] whereRecords = { String.valueOf(employeeInfo.getEmployeeUuid()),String.valueOf(employeeInfo.getEmployeeName()),String.valueOf(employeeInfo.getEmailAddress()),String.valueOf(employeeInfo.getReportingDate()),String.valueOf(employeeInfo.getAge()) };
+		String[] whereColumns = { TableSchemas.Employee.EMPLOYEE_UUID,TableSchemas.Employee.EMPLOYEE_NAME,TableSchemas.Employee.EMAIL_ADDRESS,TableSchemas.Employee.DEPARTMENT,TableSchemas.Employee.REPORTING_DATE,TableSchemas.Employee.AGE };
+		String[] whereRecords = { String.valueOf(employeeInfo.getEmployeeUuid()),String.valueOf(employeeInfo.getEmployeeName()),String.valueOf(employeeInfo.getEmailAddress()),String.valueOf(employeeInfo.getDepartment()),String.valueOf(employeeInfo.getReportingDate()),String.valueOf(employeeInfo.getAge()) };
 		 
 		ResultSet resultSet = query(getTableName(), whereColumns, whereRecords, false);
 
@@ -176,9 +176,9 @@ public class EmployeeTransactions extends TransactionWrapper {
      */
     public EmployeeInfo getEmployeeInfo(ResultSet resultSet) throws SQLException{
 
-        String employeeUuid = resultSet.getString(TableSchemas.Employee.EMPLOYEE_UUID);String employeeName = resultSet.getString(TableSchemas.Employee.EMPLOYEE_NAME);String emailAddress = resultSet.getString(TableSchemas.Employee.EMAIL_ADDRESS);String reportingDate = resultSet.getString(TableSchemas.Employee.REPORTING_DATE);int age = resultSet.getInt(TableSchemas.Employee.AGE);
+        String employeeUuid = resultSet.getString(TableSchemas.Employee.EMPLOYEE_UUID);String employeeName = resultSet.getString(TableSchemas.Employee.EMPLOYEE_NAME);String emailAddress = resultSet.getString(TableSchemas.Employee.EMAIL_ADDRESS);String department = resultSet.getString(TableSchemas.Employee.DEPARTMENT);String reportingDate = resultSet.getString(TableSchemas.Employee.REPORTING_DATE);int age = resultSet.getInt(TableSchemas.Employee.AGE);
 
-        return new EmployeeInfo(employeeUuid,employeeName,emailAddress,reportingDate,age);
+        return new EmployeeInfo(employeeUuid,employeeName,emailAddress,department,reportingDate,age);
     }
 
 	/**

@@ -28,6 +28,9 @@ public class Main {
         //consumeGetKey();
         //consumeRegister();
 
+        Object response = new AddEmployeeApiController().addEmployeePost("Victor Mwenda", "vmwenda.vm@gmail.com", 23, "Software Engineering",
+                "20161115");
+        System.out.println(response);
     }
 
     private static void consumeGetKey() {
