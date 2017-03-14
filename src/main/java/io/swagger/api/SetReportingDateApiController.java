@@ -1,5 +1,6 @@
 package io.swagger.api;
 
+import io.swagger.model.Employee;
 import io.swagger.model.Error;
 
 import io.swagger.annotations.*;
@@ -17,16 +18,20 @@ import org.springframework.web.multipart.MultipartFile;
 import java.util.List;
 
 import javax.validation.constraints.*;
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2017-03-14T15:23:43.566Z")
+
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2017-03-14T15:48:44.629Z")
 
 @Controller
 public class SetReportingDateApiController implements SetReportingDateApi {
 
 
+    public ResponseEntity<String> setReportingDatePut(@NotNull @ApiParam(value = "Email address of the employee", required = true) @RequestParam(value = "employeeemail", required = true) String employeeemail,
+                                                      @NotNull @ApiParam(value = "The reporting days of the employee", required = true) @RequestParam(value = "days", required = true) String days) {
 
-    public ResponseEntity<String> setReportingDatePut( @NotNull @ApiParam(value = "Email address of the employee", required = true) @RequestParam(value = "employeeemail", required = true) String employeeemail,
-         @NotNull @ApiParam(value = "The reporting days of the employee", required = true) @RequestParam(value = "days", required = true) String days) {
-        // do some magic!
+        ResponseEntity<Object> employeeGet = new GetEmployeeApiController().getEmployeeGet(employeeemail);
+
+        int reportingDate = Integer.parseInt(days);
+
         return new ResponseEntity<String>(HttpStatus.OK);
     }
 
