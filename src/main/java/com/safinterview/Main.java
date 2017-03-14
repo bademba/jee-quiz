@@ -1,4 +1,4 @@
-package com;
+package com.safinterview;
 
 import com.safaricom.psd.ws.GetKey;
 import com.safaricom.psd.ws.TestWS;
@@ -6,7 +6,7 @@ import com.safaricom.psd.ws.TestWS_Service;
 import com.safaricom.psd.ws.TransactionResult;
 import com.safinterview.io.reader.FileStreamReader;
 import com.safinterview.io.writer.FileStreamWriter;
-import io.swagger.api.AddEmployeeApiController;
+import io.swagger.api.*;
 import io.swagger.configuration.HomeController;
 
 import javax.xml.namespace.QName;
@@ -25,12 +25,19 @@ public class Main {
     private static String filename = "C:\\Users\\victor\\Desktop\\SafInterview\\hidden_key.txt";
 
     public static void main(String[] args) {
-        //consumeGetKey();
-        //consumeRegister();
 
-        Object response = new AddEmployeeApiController().addEmployeePost("Victor Mwenda", "vmwenda.vm@gmail.com", 23, "Software Engineering",
-                "20161115");
-        System.out.println(response);
+        //TODO VIEW 2c
+        consumeGetKey();
+
+        //TODO VIEW : 2d
+        consumeRegister();
+
+        //TODO VIEW : 3
+        System.out.println(new AddEmployeeApiController().addEmployeePost("User 2", "user2@gmail.com", 26, "Software Engineering", "20171115"));
+        System.out.println(new SetReportingDateApiController().setReportingDatePut("user2@gmail.com", "3"));
+        System.out.println(new GetEmployeesAllApiController().getEmployeesAllGet());
+        System.out.println(new GetEmployeeApiController().getEmployeeGet("user2@gmail.com"));
+        System.out.println(new DeleteEmployeeApiController().deleteEmployeePost("vmwenda.vm@gmail.com"));
     }
 
     private static void consumeGetKey() {

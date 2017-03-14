@@ -47,9 +47,8 @@ public class AddEmployeeApiController implements AddEmployeeApi {
             e.printStackTrace();
         }
         JSONObject jsonObject = new JSONObject();
-        if (add) {
+        if (!add) {
             jsonObject.put("result", "successful");
-            jsonObject.put("employee", employeeInfo);
         } else {
             jsonObject.put("result", "failed");
         }

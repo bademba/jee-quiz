@@ -41,7 +41,7 @@ public class DeleteEmployeeApiController implements DeleteEmployeeApi {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return new ResponseEntity<Boolean>(deleted, HttpStatus.OK);
+        return new ResponseEntity<Boolean>(!deleted, HttpStatus.OK);
     }
 
 }

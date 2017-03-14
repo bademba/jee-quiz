@@ -39,8 +39,20 @@ public class GetEmployeesAllApiController implements GetEmployeesAllApi {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+
         JSONArray jsonArray = new JSONArray();
-        jsonArray.toJSONString(employeeInfos);
+        int i = 0;
+        for (EmployeeInfo employee : employeeInfos) {
+            JSONObject jsonObject = new JSONObject();
+            jsonObject.put("employeename", employee.getEmployeeName());
+            jsonObject.put("emailaddress", employee.getEmailAddress());
+            jsonObject.put("department", employee.getDepartment());
+            jsonObject.put("age", employee.getAge());
+            jsonObject.put("reportingdate", employee.getReportingDate());
+            jsonArray.add(i, jsonObject);
+            i++;
+        }
+
         return new ResponseEntity<List<Employee>>(jsonArray, HttpStatus.OK);
     }
 

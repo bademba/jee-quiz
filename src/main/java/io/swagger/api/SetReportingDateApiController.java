@@ -2,6 +2,7 @@ package io.swagger.api;
 
 import com.safinterview.database.crud.employee.EmployeeTransactions;
 import com.safinterview.database.models.employee.EmployeeInfo;
+import com.safinterview.date.CalendarUtils;
 import io.swagger.model.Employee;
 import io.swagger.model.Error;
 
@@ -21,6 +22,7 @@ import java.net.ConnectException;
 import java.net.SocketException;
 import java.sql.SQLException;
 import java.util.List;
+import java.util.Locale;
 
 import javax.validation.constraints.*;
 
@@ -39,10 +41,30 @@ public class SetReportingDateApiController implements SetReportingDateApi {
             List<EmployeeInfo> employeeInfos = employeeTransactions.getEmployeeInfoAll();
             for (EmployeeInfo employeeInfo : employeeInfos) {
                 if (employeeInfo.getEmailAddress().equals(employeeemail)) {
-                    EmployeeInfo tmpEmployee = employeeInfo;
+
+                    EmployeeInfo tmpEmployee = new EmployeeInfo(
+                            employeeInfo.getEmployeeUuid(),
+                            employeeInfo.getEmployeeName(),
+                            employeeInfo.getEmailAddress(),
+                            employeeInfo.getDepartment(),
+                            employeeInfo.getReportingDate(),
+                            employeeInfo.getAge()
+                    );
+
                     if (tmpEmployee.getReportingDate().equals("20161115")) {
                         tmpEmployee.setReportingDate("20161117");
-                        updated = employeeTransactions.update(employeeInfo, tmpEmployee);
+                        updated = employeeTransactions.update(employeeInfo,tmpEmployee);
+                    } else {
+                        String year = CalendarUtils.getFormattedDate("yyy", CalendarUtils.parseTime("yyy-MM-dd", employeeInfo.getReportingDate()));
+                        String month = CalendarUtils.getFormattedDate("MM", CalendarUtils.parseTime("yyy-MM-dd", employeeInfo.getReportingDate()));
+                        String date = CalendarUtils.getFormattedDate("dd", CalendarUtils.parseTime("yyy-MM-dd", employeeInfo.getReportingDate()));
+                        int _date = Integer.parseInt(date);
+                        _date = _date + Integer.parseInt(days);
+
+                        String reportingDate = String.format(Locale.getDefault(), "%s%s%d", year, month, _date);
+                        tmpEmployee.setReportingDate(reportingDate);
+                        updated = employeeTransactions.update(employeeInfo,tmpEmployee);
+                        System.out.println("Setting reporing date to "+reportingDate);
                     }
                 }
             }
